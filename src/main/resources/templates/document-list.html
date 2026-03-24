@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Documents</title>
+</head>
+<body>
+<h1>Documents</h1>
+<a href="/">Home</a> | <a href="/documents/create">Create Document</a>
+<table border="1" style="margin-top: 20px;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Type</th>
+        <th>Created Date</th>
+        <th>Word Version</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doc : ${documents}">
+        <td th:text="${doc.id}"></td>
+        <td th:text="${doc.title}"></td>
+        <td th:text="${doc.author}"></td>
+        <td th:text="${doc.type}"></td>
+        <td th:text="${doc.createdDate}"></td>
+        <td th:text="${doc instanceof T(org.example.documentmanagementsystem.model.WordDocument) ? doc.wordVersion : '-'}"></td>
+        <td>
+            <a th:href="@{'/documents/update/' + ${doc.id}}">Update</a> |
+            <a th:href="@{'/documents/delete/' + ${doc.id}}">Delete</a> |
+            <a th:href="@{'/documents/clone/' + ${doc.id}}">Clone</a> |
+            <a th:href="@{'/documents/metadata/' + ${doc.id}}">Add Metadata</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

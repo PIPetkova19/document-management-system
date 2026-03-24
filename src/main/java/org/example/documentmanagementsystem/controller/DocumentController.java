@@ -1,0 +1,88 @@
+package org.example.documentmanagementsystem.controller;
+
+import org.example.documentmanagementsystem.DocumentType;
+import org.example.documentmanagementsystem.model.Document;
+import org.example.documentmanagementsystem.service.DocumentService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/documents")
+public class DocumentController {
+
+    private final DocumentService documentService;
+
+    public DocumentController(DocumentService documentService) {
+        this.documentService = documentService;
+    }
+
+    // Index page
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    // List all documents
+    @GetMapping
+    public String listDocuments(Model model) {
+        model.addAttribute("documents", documentService.getAllDocuments());
+        return "document-list";
+    }
+
+    // Show create form
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("types", DocumentType.values());
+        return "document-create";
+    }
+
+    // Handle create
+    @PostMapping("/create")
+    public String createDocument(@RequestParam String title,
+                                 @RequestParam String author,
+                                 @RequestParam DocumentType type) {
+        documentService.createDocument(type, title, author);
+        return "redirect:/documents";
+    }
+
+    // Show update form
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Document doc = documentService.getDocument(id);
+        model.addAttribute("document", doc);
+        model.addAttribute("types", DocumentType.values());
+        return "document-update";
+    }
+
+    // Handle update
+    @PostMapping("/update/{id}")
+    public String updateDocument(@PathVariable Long id,
+                                 @RequestParam String title,
+                                 @RequestParam String author,
+                                 @RequestParam String type) {
+        documentService.updateDocument(id, type, title, author);
+        return "redirect:/documents";
+    }
+
+    // Delete
+    @GetMapping("/delete/{id}")
+    public String deleteDocument(@PathVariable Long id) {
+        documentService.deleteDocument(id);
+        return "redirect:/documents";
+    }
+
+    // Clone
+    @GetMapping("/clone/{id}")
+    public String cloneDocument(@PathVariable Long id) {
+        documentService.cloneDocument(id);
+        return "redirect:/documents";
+    }
+
+    // Add metadata
+    @GetMapping("/metadata/{id}")
+    public String addMetadata(@PathVariable Long id) {
+        documentService.addMetadate(id);
+        return "redirect:/documents";
+    }
+}

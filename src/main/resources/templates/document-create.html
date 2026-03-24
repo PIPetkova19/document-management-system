@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Document</title>
+</head>
+<body>
+<h1>Create Document</h1>
+<form th:action="@{/documents/create}" method="post">
+    Title: <input type="text" name="title" required><br>
+    Author: <input type="text" name="author" required><br>
+    Type:
+    <select name="type">
+        <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+    </select><br>
+    <button type="submit">Create</button>
+</form>
+<a href="/documents">Back to List</a>
+</body>
+</html>
