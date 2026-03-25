@@ -60,7 +60,7 @@ public class DocumentController {
     public String updateDocument(@PathVariable Long id,
                                  @RequestParam String title,
                                  @RequestParam String author,
-                                 @RequestParam String type) {
+                                 @RequestParam DocumentType type) {
         documentService.updateDocument(id, type, title, author);
         return "redirect:/documents";
     }

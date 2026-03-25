@@ -5,7 +5,7 @@ import org.example.documentmanagementsystem.model.WordDocument;
 
 import java.time.LocalDate;
 
-public class MetadateVisitor implements DocumentVisitor {
+public class MetadataVisitor implements DocumentVisitor {
 
     public void visit(WordDocument word) {
         word.setCreatedDate(LocalDate.now());

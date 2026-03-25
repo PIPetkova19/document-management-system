@@ -8,10 +8,13 @@
 <form th:action="@{'/documents/update/' + ${document.id}}" method="post">
     Title: <input type="text" name="title" th:value="${document.title}" required><br>
     Author: <input type="text" name="author" th:value="${document.author}" required><br>
-    Type:
+    <label>Type:</label>
     <select name="type">
-        <option th:each="type : ${types}" th:value="${type}" th:text="${type}"
-                th:selected="${type == document.type}"></option>
+        <option th:each="type : ${types}"
+                th:value="${type}"
+                th:text="${type}"
+                th:selected="${type == document.type}">
+        </option>
     </select><br>
     <button type="submit">Update</button>
 </form>

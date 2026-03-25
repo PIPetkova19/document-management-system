@@ -41,7 +41,6 @@ public abstract class Document {
         return id;
     }
 
-
     public LocalDate getCreatedDate() {
         return createdDate;
     }

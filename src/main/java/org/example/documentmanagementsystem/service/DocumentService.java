@@ -7,7 +7,7 @@ import org.example.documentmanagementsystem.model.WordDocument;
 import org.springframework.stereotype.Service;
 import org.example.documentmanagementsystem.repository.DocumentRepository;
 import org.example.documentmanagementsystem.visitor.DocumentVisitor;
-import org.example.documentmanagementsystem.visitor.MetadateVisitor;
+import org.example.documentmanagementsystem.visitor.MetadataVisitor;
 
 import java.util.List;
 
@@ -49,17 +49,11 @@ public class DocumentService {
         return documentRepository.getDocumentById(id);
     }
 
-    public void updateDocument(long id, String type, String title, String author) {
+    public void updateDocument(long id, DocumentType type, String title, String author) {
         Document document = documentRepository.getDocumentById(id);
             document.setAuthor(author);
             document.setTitle(title);
-
-            try {
-                DocumentType docType = DocumentType.valueOf(type);
-                document.setType(docType);
-            } catch (RuntimeException e) {
-                System.out.println("Invalid document type: " + type);
-            }
+            document.setType(type);
 
             documentRepository.save(document);
             System.out.println("Document updated");
@@ -74,7 +68,7 @@ public class DocumentService {
     public void addMetadate(long id) {
         Document doc = documentRepository.getDocumentById(id);
 
-        DocumentVisitor visitor = new MetadateVisitor();
+        DocumentVisitor visitor = new MetadataVisitor();
         doc.accept(visitor);
 
         documentRepository.save(doc);
