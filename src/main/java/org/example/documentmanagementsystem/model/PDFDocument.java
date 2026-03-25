@@ -15,8 +15,8 @@ public class PDFDocument extends Document {
     @Override
     public Document clone() {
         PDFDocument copy = new PDFDocument();
-        copy.setTitle(getTitle());
-        copy.setAuthor(getAuthor());
+        copy.setTitle(this.getTitle());
+        copy.setAuthor(this.getAuthor());
         copy.setCreatedDate(this.getCreatedDate());
         copy.setType(this.getType());
         return copy;

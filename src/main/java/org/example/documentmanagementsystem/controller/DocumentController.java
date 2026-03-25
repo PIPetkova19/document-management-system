@@ -17,27 +17,23 @@ public class DocumentController {
         this.documentService = documentService;
     }
 
-    // Index page
     @GetMapping("/")
     public String index() {
         return "index";
     }
 
-    // List all documents
     @GetMapping
     public String listDocuments(Model model) {
         model.addAttribute("documents", documentService.getAllDocuments());
-        return "document-list";
+        return "list";
     }
 
-    // Show create form
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("types", DocumentType.values());
-        return "document-create";
+        return "create";
     }
 
-    // Handle create
     @PostMapping("/create")
     public String createDocument(@RequestParam String title,
                                  @RequestParam String author,
@@ -46,16 +42,14 @@ public class DocumentController {
         return "redirect:/documents";
     }
 
-    // Show update form
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable Long id, Model model) {
         Document doc = documentService.getDocument(id);
         model.addAttribute("document", doc);
         model.addAttribute("types", DocumentType.values());
-        return "document-update";
+        return "update";
     }
 
-    // Handle update
     @PostMapping("/update/{id}")
     public String updateDocument(@PathVariable Long id,
                                  @RequestParam String title,
@@ -65,24 +59,21 @@ public class DocumentController {
         return "redirect:/documents";
     }
 
-    // Delete
     @GetMapping("/delete/{id}")
     public String deleteDocument(@PathVariable Long id) {
         documentService.deleteDocument(id);
         return "redirect:/documents";
     }
 
-    // Clone
     @GetMapping("/clone/{id}")
     public String cloneDocument(@PathVariable Long id) {
         documentService.cloneDocument(id);
         return "redirect:/documents";
     }
 
-    // Add metadata
     @GetMapping("/metadata/{id}")
     public String addMetadata(@PathVariable Long id) {
-        documentService.addMetadate(id);
+        documentService.addMetadata(id);
         return "redirect:/documents";
     }
 }

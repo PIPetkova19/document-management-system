@@ -18,8 +18,8 @@ public class WordDocument extends Document {
     @Override
     public Document clone() {
         WordDocument copy = new WordDocument();
-        copy.setTitle(getTitle());
-        copy.setAuthor(getAuthor());
+        copy.setTitle(this.getTitle());
+        copy.setAuthor(this.getAuthor());
         copy.setCreatedDate(this.getCreatedDate());
         copy.setWordVersion(this.getWordVersion());
         copy.setType(this.getType());

@@ -65,14 +65,14 @@ public class DocumentService {
     }
 
     //visiting
-    public void addMetadate(long id) {
+    public void addMetadata(long id) {
         Document doc = documentRepository.getDocumentById(id);
 
         DocumentVisitor visitor = new MetadataVisitor();
         doc.accept(visitor);
 
         documentRepository.save(doc);
-        System.out.println("Metadate added");
+        System.out.println("Metadata added");
     }
 
     //clone
