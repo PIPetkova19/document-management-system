@@ -28,6 +28,11 @@ public abstract class Document {
         this.type = type;
     }
 
+    //za testove
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
