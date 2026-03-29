@@ -1,6 +1,6 @@
 package org.example.documentmanagementsystem.controller;
 
-import org.example.documentmanagementsystem.DocumentType;
+import org.example.documentmanagementsystem.model.DocumentType;
 import org.example.documentmanagementsystem.model.Document;
 import org.example.documentmanagementsystem.service.DocumentService;
 import org.springframework.stereotype.Controller;

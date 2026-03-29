@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.example.documentmanagementsystem.DocumentType;
 import org.example.documentmanagementsystem.visitor.DocumentVisitor;
 
 import java.time.LocalDate;
@@ -12,14 +11,16 @@ import java.time.LocalDate;
 @Entity
 public class PDFDocument extends Document {
 
+    public PDFDocument() {}
+
+    public PDFDocument(String title, String author,
+                       LocalDate createdDate, DocumentType type) {
+      super(title,author,createdDate,type);
+    }
+
     @Override
     public Document clone() {
-        PDFDocument copy = new PDFDocument();
-        copy.setTitle(this.getTitle());
-        copy.setAuthor(this.getAuthor());
-        copy.setCreatedDate(this.getCreatedDate());
-        copy.setType(this.getType());
-        return copy;
+        return new PDFDocument(this.title, this.author, this.createdDate, this.type);
     }
 
     @Override

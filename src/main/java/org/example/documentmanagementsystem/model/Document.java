@@ -3,7 +3,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.example.documentmanagementsystem.DocumentType;
 import org.example.documentmanagementsystem.visitor.DocumentVisitor;
 
 import java.time.LocalDate;
@@ -12,41 +11,25 @@ import java.time.LocalDate;
 public abstract class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
 
-    String title;
-    String author;
-    LocalDate createdDate;
-    DocumentType type;
+     String title;
+     String author;
+     LocalDate createdDate;
+     DocumentType type;
 
-    public Document() {
-    }
+     public Document(){}
 
-    public Document(String title, String author, LocalDate createdDate, DocumentType type) {
+    public Document(String title, String author,
+                    LocalDate createdDate, DocumentType type) {
         this.title = title;
         this.author = author;
         this.createdDate = createdDate;
         this.type = type;
     }
 
-    public DocumentType getType() {
-        return type;
-    }
-
-    public void setType(DocumentType type) {
-        this.type = type;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getTitle() {
@@ -65,9 +48,26 @@ public abstract class Document {
         this.author = author;
     }
 
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public DocumentType getType() {
+        return type;
+    }
+
+    public void setType(DocumentType type) {
+        this.type = type;
+    }
+
     //visitor
     public abstract void accept(DocumentVisitor visitor);
 
     //prototype(interface)
     public abstract Document clone();
+
 }

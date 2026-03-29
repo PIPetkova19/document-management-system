@@ -1,6 +1,6 @@
 package org.example.documentmanagementsystem.service;
 
-import org.example.documentmanagementsystem.DocumentType;
+import org.example.documentmanagementsystem.model.DocumentType;
 import org.example.documentmanagementsystem.model.Document;
 import org.example.documentmanagementsystem.model.PDFDocument;
 import org.example.documentmanagementsystem.model.WordDocument;
@@ -21,17 +21,10 @@ public class DocumentService {
 
     //crud
     public void createDocument(DocumentType type, String title, String author) {
-        Document doc;
-        switch (type) {
-            case WORD:
-                doc = new WordDocument();
-                break;
-            case PDF:
-                doc = new PDFDocument();
-                break;
-            default:
-                throw new RuntimeException("Unsupported document type: " + type);
-        }
+        Document doc = switch (type) {
+            case WORD -> new WordDocument();
+            case PDF -> new PDFDocument();
+        };
 
         doc.setType(type);
         doc.setAuthor(author);
