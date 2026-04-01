@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class DocumentPrototypeTest {
     @Test
-    void shouldCloneDocument() {
+    void should_cloneDoc_whenCloneIsCalled() {
         PDFDocument original = new PDFDocument("Title",
                 "Author", LocalDate.now(), DocumentType.PDF);
 
@@ -23,7 +23,7 @@ public class DocumentPrototypeTest {
     }
 
     @Test
-    void shouldCloneFields(){
+    void should_checkFields_whenCloneIsCalled() {
         PDFDocument original = new PDFDocument("Title","Author",
                 LocalDate.now(),DocumentType.PDF);
 

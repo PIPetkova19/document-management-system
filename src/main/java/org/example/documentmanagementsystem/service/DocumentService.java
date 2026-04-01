@@ -1,5 +1,6 @@
 package org.example.documentmanagementsystem.service;
 
+import exception.DocumentNotFoundException;
 import org.example.documentmanagementsystem.model.DocumentType;
 import org.example.documentmanagementsystem.model.Document;
 import org.example.documentmanagementsystem.model.PDFDocument;
@@ -39,7 +40,14 @@ public class DocumentService {
     }
 
     public Document getDocument(long id) {
-        return documentRepository.getDocumentById(id);
+
+        Document doc = documentRepository.getDocumentById(id);
+
+        if (doc == null) {
+            throw new DocumentNotFoundException("doc not found");
+        }
+
+        return doc;
     }
 
     public void updateDocument(long id, DocumentType type, String title, String author) {
